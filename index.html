@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Iqfar Mutaqin — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* VOICE: confident engineering lead, plain-spoken, numbers first
+   IDEA: a phone in the hand — the work is apps, so the page shows them running
+   PICTURE: a large device cycling through real shipped screens, beside a yellow slab with the key figure
+   COLOUR and TYPE: white, ink #101418, warm yellow #ffd84a slab only for key figures, slate; Manrope 800 + Manrope
+   LAYOUT: name and phone first screen, impact strip, filterable work, interactive career timeline, skills, contact */
+:root{color-scheme:light dark;
+--bg:light-dark(#ffffff,#101418);--ink:light-dark(#101418,#eef1f4);--soft:light-dark(#f2f4f6,#181e24);
+--line:light-dark(#dfe3e8,#2a323b);--muted:light-dark(#56606b,#a3adb8);--y:#ffd84a;--yi:#101418}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Manrope,system-ui,sans-serif;overflow-x:clip}
+html{scroll-padding-top:72px;scroll-behavior:smooth}
+a{color:inherit}
+.band{padding:clamp(40px,6vw,88px) max(5vw,16px)}
+.wrap{max-width:1240px;margin:0 auto}
+h1,h2,h3{margin:0;text-wrap:balance;line-height:1.05;font-weight:800}
+h2{font-size:clamp(30px,4vw,46px);margin-bottom:12px}
+.lead{color:var(--muted);max-width:62ch;margin:0 0 32px}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--y);outline-offset:3px}
+/* nav */
+nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;gap:16px;padding:10px max(5vw,16px);flex-wrap:wrap}
+.logo{font-weight:800;text-decoration:none;font-size:18px;display:flex;align-items:center;gap:10px}
+.logo b{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--y);color:var(--yi);font-size:14px}
+.links{display:flex;gap:4px;margin-left:auto;overflow-x:auto}
+.links a{text-decoration:none;padding:10px 12px;border-radius:8px;font-weight:600;font-size:15px;color:var(--muted);flex:none}
+.links a:hover,.links a.on{color:var(--ink);background:var(--soft)}
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.hero h1{font-size:clamp(44px,7.2vw,96px);letter-spacing:-.02em}
+.role{font-size:clamp(19px,2vw,24px);font-weight:700;margin:18px 0 6px;min-height:1.4em}
+.role span{border-bottom:3px solid var(--y)}
+.hero p{color:var(--muted);max-width:56ch;margin:10px 0 26px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 22px;border-radius:12px;font-weight:700;text-decoration:none;border:1.5px solid var(--ink);background:none}
+.btn.pri{background:var(--ink);color:var(--bg)}
+.btn:hover{transform:translateY(-2px)}.btn{transition:transform .2s}
+.stage{position:relative;display:grid;place-items:center end;min-height:540px;padding-right:7%}
+.slab{position:absolute;inset:8% 0 8% 14%;background:var(--y);border-radius:28px;color:var(--yi)}
+.slab .k{position:absolute;left:20px;top:22px;max-width:6.6em}
+.slab .k strong{display:block;font-size:clamp(48px,6vw,72px);line-height:1}
+.slab .k span{font-weight:700;font-size:14px}
+.phone{position:relative;width:min(250px,62vw);aspect-ratio:9/19.5;border-radius:38px;background:#0b0e11;padding:10px;box-shadow:0 30px 60px -20px rgba(16,20,24,.55),inset 0 0 0 2px #2d3540;transform:rotate(-4deg)}
+.phone .scr{position:relative;width:100%;height:100%;border-radius:29px;overflow:hidden;background:#000}
+.phone img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:0;transition:opacity .8s}
+.phone img.on{opacity:1}
+.notch{position:absolute;top:16px;left:50%;translate:-50% 0;width:34%;height:20px;border-radius:12px;background:#0b0e11;z-index:2}
+.tag{position:absolute;z-index:3;right:0;top:3%;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:10px 14px;font-size:13px;font-weight:700;box-shadow:0 10px 24px -12px rgba(0,0,0,.35)}
+.tag i{font-style:normal;color:var(--muted);display:block;font-weight:500}
+/* impact */
+.impact{background:var(--ink);color:var(--bg)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.stat strong{font-size:clamp(40px,5vw,60px);line-height:1;display:block}
+.stat span{opacity:.75;font-size:15px}
+.stat:first-child strong{color:var(--y)}
+/* work */
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.chip{min-height:44px;padding:0 18px;border-radius:999px;border:1.5px solid var(--line);background:none;font-weight:600}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.card{display:flex;flex-direction:column;text-align:left;background:var(--soft);border:0;border-radius:20px;padding:0;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -24px rgba(0,0,0,.45)}
+.card .th{aspect-ratio:4/3;width:100%;background:var(--line);overflow:hidden}
+.card .th img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .5s}
+.card:hover .th img{transform:scale(1.05)}
+.card .bd{padding:18px 20px 22px}
+.card h3{font-size:20px;line-height:1.2}
+.card .cl{color:var(--muted);font-size:14px;margin:4px 0 10px}
+.pills{display:flex;gap:6px;flex-wrap:wrap}
+.pill{font-size:13px;font-weight:600;padding:3px 10px;border-radius:999px;border:1px solid var(--line);background:var(--bg)}
+.card.hide{display:none}
+/* modal */
+dialog{border:0;padding:0;border-radius:24px;width:min(980px,94vw);max-height:92vh;background:var(--bg);color:var(--ink)}
+dialog::backdrop{background:rgba(10,13,16,.7);backdrop-filter:blur(4px)}
+.mh{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
+.gal{position:relative;background:var(--soft)}
+.track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;height:min(70vh,560px);scrollbar-width:none}
+.track::-webkit-scrollbar{display:none}
+.track figure{flex:0 0 100%;height:100%;margin:0;scroll-snap-align:center;display:flex;align-items:center;justify-content:center;padding:20px 20px 70px}
+.track img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:12px;box-shadow:0 12px 30px -16px rgba(0,0,0,.4)}
+.nav2{position:absolute;bottom:14px;left:0;right:0;display:flex;justify-content:center;gap:8px}
+.nav2 button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--bg);font-size:18px;font-weight:700}
+.minfo{padding:28px;overflow:auto;max-height:min(70vh,560px)}
+.minfo h3{font-size:28px;margin-bottom:6px}
+.minfo p{color:var(--muted)}
+.x{position:absolute;top:12px;right:12px;z-index:3;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--bg);font-size:20px}
+/* timeline */
+.tl{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:28px;align-items:start}
+.roles{display:flex;flex-direction:column;border-left:2px solid var(--line)}
+.roles button{position:relative;text-align:left;background:none;border:0;padding:12px 16px;min-height:44px;border-radius:0 12px 12px 0}
+.roles button::before{content:"";position:absolute;left:-7px;top:20px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--line)}
+.roles button b{display:block;font-size:16px}
+.roles button span{font-size:13px;color:var(--muted)}
+.roles button[aria-selected=true]{background:var(--soft)}
+.roles button[aria-selected=true]::before{background:var(--y);border-color:var(--ink)}
+.panel{background:var(--soft);border-radius:24px;padding:clamp(20px,3vw,36px);position:sticky;top:88px}
+.panel h3{font-size:clamp(24px,2.6vw,32px)}
+.meta{color:var(--muted);font-weight:600;margin:8px 0 18px;font-size:15px}
+.panel ul{padding-left:20px;margin:0 0 22px}.panel li{margin-bottom:8px}
+.ach{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.ach div{background:var(--y);color:var(--yi);border-radius:14px;padding:12px 14px;font-size:14px;font-weight:600;line-height:1.3}
+.ach strong{display:block;font-size:24px;font-weight:800}
+.promo{display:inline-block;font-size:13px;font-weight:700;background:var(--ink);color:var(--bg);padding:4px 10px;border-radius:8px;margin-bottom:12px}
+/* skills */
+.sk{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.skc{border:1.5px solid var(--line);border-radius:18px;padding:20px}
+.skc h3{font-size:18px;margin-bottom:12px;line-height:1.2}
+.skc .pill{background:var(--soft);border:0;font-size:14px;padding:5px 11px}
+.edu{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:40px}
+.edu div{border-top:3px solid var(--ink);padding-top:14px}
+.edu b{display:block;font-size:18px}.edu span{color:var(--muted);font-size:15px}
+/* contact */
+.contact{background:var(--y);color:var(--yi)}
+.contact h2{font-size:clamp(36px,5.4vw,68px);max-width:14ch}
+.contact .lead{color:#3a3f45}
+.cc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.ci{background:#101418;color:#fff;border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:8px}
+.ci small{opacity:.7;font-size:13px}.ci b{font-size:17px;overflow-wrap:anywhere}
+.ci .btn{border-color:#fff;color:#fff;min-height:44px;align-self:flex-start;margin-top:4px}
+footer{padding:24px max(5vw,16px);font-size:14px;color:var(--muted);text-align:center}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}}
+@media(max-width:900px){.hero,.tl,.mh{grid-template-columns:minmax(0,1fr)}.panel{position:static}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.cc,.edu{grid-template-columns:minmax(0,1fr)}.track{height:52vh}.minfo{max-height:none}dialog{overflow:auto}}
+@media(max-width:600px){.links{display:none}.slab .k{display:none}.stage{padding-right:0;place-items:center}.stage{min-height:460px}.ach{grid-template-columns:minmax(0,1fr)}.roles{flex-direction:row;overflow-x:auto;border-left:0;border-bottom:2px solid var(--line)}.roles button{flex:none;border-radius:12px 12px 0 0}.roles button::before{display:none}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="logo" href="#top"><b>MI</b>Iqfar Mutaqin</a>
+  <div class="links"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#contact">Contact</a></div>
+</div></nav>
+
+<header class="band" id="top"><div class="wrap hero">
+  <div class="rv">
+    <h1>Muhammad Iqfar Mutaqin</h1>
+    <div class="role" aria-live="polite"><span id="role">IT Department Manager</span></div>
+    <p>Senior Fullstack Software Engineer with 7+ years building scalable mobile and web apps across fintech, HR and e-commerce. From React Native and Next.js to NestJS, Spring Boot and Laravel, shipped on AWS, GCP, Docker and Kubernetes. Based in Jakarta, open to fully remote work across UTC+5 to UTC+9.</p>
+    <div class="cta"><a class="btn pri" href="#work">See my work →</a><a class="btn" href="#contact">Get in touch</a></div>
+  </div>
+  <div class="stage rv" aria-hidden="true">
+    <div class="slab"><div class="k"><strong data-n="7" data-s="+">7+</strong><span>years shipping mobile, web and EDC apps</span></div></div>
+    <div class="tag" id="ptag">Hukumku<i>React Native · iOS & Android</i></div>
+    <div class="phone"><div class="notch"></div><div class="scr" id="scr"></div></div>
+  </div>
+</div></header>
+
+<section class="band impact"><div class="wrap stats">
+  <div class="stat rv"><strong data-n="80" data-s="%">80%</strong><span>better transaction reliability from payment SDK work</span></div>
+  <div class="stat rv"><strong data-n="60" data-s="%">60%</strong><span>fewer production bugs after code review standards</span></div>
+  <div class="stat rv"><strong data-n="50" data-s="%">50%</strong><span>faster EDC transactions and engineer onboarding</span></div>
+  <div class="stat rv"><strong data-n="35" data-s="%">35%</strong><span>fewer critical production incidents in one quarter</span></div>
+</div></section>
+
+<section class="band" id="work"><div class="wrap">
+  <h2 class="rv">Selected work</h2>
+  <p class="lead rv">Enterprise field apps that work offline, AI attendance on device, banking, legal tech, dating and games. Tap a project to see the screens.</p>
+  <div class="chips" role="group" aria-label="Filter projects" id="chips"></div>
+  <div class="grid" id="grid"></div>
+</div></section>
+
+<dialog id="dlg" aria-labelledby="mt">
+  <button class="x" id="close" aria-label="Close">×</button>
+  <div class="mh">
+    <div class="gal"><div class="track" id="track" tabindex="0" aria-label="Screens"></div>
+      <div class="nav2"><button id="prev" aria-label="Previous screen">←</button><button id="next" aria-label="Next screen">→</button></div></div>
+    <div class="minfo"><h3 id="mt"></h3><div class="cl" id="mc" style="color:var(--muted);font-weight:600"></div><p id="md"></p><div class="pills" id="mp"></div></div>
+  </div>
+</dialog>
+
+<section class="band" id="experience" style="background:var(--soft)"><div class="wrap">
+  <h2 class="rv">Experience</h2>
+  <p class="lead rv">From game programming intern to leading IT at Tata Sarana Makmur. Pick a role to read what changed while I was there.</p>
+  <div class="tl">
+    <div class="roles" role="tablist" aria-label="Roles" id="roles"></div>
+    <div class="panel" role="tabpanel" id="panel" style="background:var(--bg)"></div>
+  </div>
+</div></section>
+
+<section class="band" id="skills"><div class="wrap">
+  <h2 class="rv">Skills</h2>
+  <p class="lead rv">Full stack across mobile, web, backend and cloud, with the leadership side to run a team.</p>
+  <div class="sk" id="sk"></div>
+  <div class="edu">
+    <div class="rv"><b>B.Sc. Data Science</b><span>Universitas Terbuka · 2024 – present</span></div>
+    <div class="rv"><b>Mobile Development Bootcamp</b><span>Glints Academy · 2020</span></div>
+    <div class="rv"><b>Multimedia, top graduate</b><span>Al-Amanah Vocational School · 2019</span></div>
+  </div>
+</div></section>
+
+<section class="band contact" id="contact"><div class="wrap">
+  <h2>Let's build something that ships.</h2>
+  <p class="lead">Open to fully remote roles across UTC+5 to UTC+9, and to leadership or senior fullstack positions in Jakarta.</p>
+  <div class="cc">
+    <div class="ci"><small>Email</small><b>iqfar.silai@gmail.com</b><button class="btn" data-copy="iqfar.silai@gmail.com">Copy email</button></div>
+    <div class="ci"><small>Phone / WhatsApp</small><b>+62 812 9350 7979</b><button class="btn" data-copy="+6281293507979">Copy number</button></div>
+    <div class="ci"><small>LinkedIn</small><b>linkedin.com/in/iqfar</b><a class="btn" href="https://www.linkedin.com/in/iqfar" target="_blank" rel="noopener">Open profile ↗</a></div>
+  </div>
+</div></section>
+<footer>© Muhammad Iqfar Mutaqin · Jakarta, Indonesia</footer>
+
+<script>
+{
+const P=[
+{id:'qhse',t:'QHSE Mobile',c:'Android & iOS',cat:['Enterprise'],img:['qhse'],tags:['Mobile','Audit','CAPA'],
+ d:'Risk Containment Audit and Opportunity Records plus Corrective and Preventive Action Requests. I redesigned the QHSE app around a cleaner experience so teams log data faster, analyse it better and act on it sooner.'},
+{id:'inspection',t:'Mobile Inspection',c:'PT Triputra Agro Persada · Android',cat:['Enterprise'],img:['inspection'],tags:['Offline-first','Android','Plantation'],
+ d:'Palm oil plantations often sit far from any signal. This logging app stores data offline in the field and syncs when a connection comes back, built to the client\'s request.'},
+{id:'cermin',t:'Cermin',c:'PT Triputra Agro Persada · Android',cat:['Enterprise','AI'],img:['cermin'],tags:['TensorFlow','Face recognition','Offline'],
+ d:'An offline face-recognition attendance machine. Using TensorFlow, it brings AI attendance to HR teams working in the field with little or no internet.'},
+{id:'btn',t:'BTN Credit Card',c:'Bank BTN · Android & iOS',cat:['Fintech'],img:['btn'],tags:['Banking','API integration','Co-branding'],
+ d:'The BTN credit card app, run by BTN with BRI under a co-branding agreement. It connects both banks through an API that distributes financial data to the platform.'},
+{id:'hukumku',t:'Hukumku',c:'Android & iOS · Play Store and App Store',cat:['Consumer'],img:['hukumku-1','hukumku-2','hukumku-3','hukumku-4','hukumku-5'],tags:['React Native','Socket.io','Live chat'],
+ d:'Lawyer consultation app in the spirit of Halodoc, for legal advice. Live chat and document drafting run over sockets. Built in React Native and published on both stores.'},
+{id:'vinita',t:'Vinita',c:'South Asian dating app · iOS',cat:['Consumer'],img:['vinita-1','vinita-2','vinita-3','vinita-4'],tags:['React Native','Swipe match','Live chat'],
+ d:'Swipe to match or pass, then chat live. Built in React Native for Android and iOS, released on iOS for the South Asian market.'},
+{id:'mld',t:'My Lovely Daughter',c:'GameChanger Studio',cat:['Games'],img:['mld'],tags:['Unity','Localisation','Bug fixing'],
+ d:'An alchemist simulator about a father\'s grief. I added multi-language support and fixed bugs in the inventory management system.'},
+{id:'goblock',t:"GoBlock's Impossible Medley",c:'GameChanger Studio',cat:['Games'],img:['goblock'],tags:['Unity','C#','Gameplay'],
+ d:'A frustrating, addictive game that mixes three challenges: jump, fly and roll in loops. I helped build the game.'}];
+const CATS=['All','Enterprise','AI','Fintech','Consumer','Games'];
+const R=[
+{t:'IT Department Manager',co:'Tata Sarana Makmur',when:'Dec 2025 – Present',where:'Jakarta · On-site',promo:'Promoted for technical leadership',
+ b:['Built a unified engineering delivery framework that cut project delays by 30%.','Ran a technology roadmap that scaled infrastructure capacity 40% without adding headcount.','Lead a cross-functional team of 8; structured sprint planning lifted delivery velocity 25%.','Rolled out DevOps and security standards, cutting critical production incidents 35% in the first quarter.','Set architecture guidelines that halved onboarding time for new engineers.'],
+ a:[['35%','fewer production incidents'],['40%','more infrastructure capacity'],['50%','faster onboarding']]},
+{t:'Senior & Lead Frontend Developer',co:'Tata Sarana Makmur',when:'Feb 2024 – Dec 2025',where:'Jakarta · On-site',
+ b:['Redesigned EDC app architecture, raising transaction throughput 20% across merchant clients.','Integrated payment SDKs on mobile and embedded devices, fixing security issues and improving reliability 80%.','Optimised device-layer protocols for 50% faster transactions and less downtime.','Set code review and deployment standards that reduced production bugs 60%.','Led a small team from sprint planning to production.'],
+ a:[['80%','better security & reliability'],['60%','fewer production bugs'],['50%','faster transactions']]},
+{t:'Senior Mobile Developer',co:'Koda',when:'Sep 2023 – Feb 2024',where:'Jakarta · Hybrid',
+ b:['Delivered a greenfield legal e-commerce platform end-to-end to App Store and Play Store in React Native.','Designed the mobile architecture, improving performance 30% over the previous solution.','Set async rituals across time zones that cut handoff delays 50%.','Profiling and optimisation reduced load time 40%.','Turned complex legal workflows into UX that lifted task completion 15%.'],
+ a:[['30%','better app performance'],['40%','faster load time'],['On time','full platform launch']]},
+{t:'Mobile Developer (Remote Contract)',co:'Virtual Spirit, Malaysia',when:'Feb 2022 – Feb 2024',where:'Fully remote',
+ b:['Maintained cross-platform apps for international clients with zero missed releases in two years.','Built a reusable component library that cut feature development time 25%.','Streamlined deployment and QA: release cycle down 20%, bug escape rate down 30%.','Kept 98% client satisfaction across the contract.','Ran several concurrent projects independently.'],
+ a:[['25%','less dev time'],['20%','shorter release cycle'],['98%','client satisfaction']]},
+{t:'Mobile Developer',co:'Infini Oase Technology',when:'Feb 2021 – Sep 2023',where:'Jakarta · Hybrid',
+ b:['Shipped mobile apps for HR, education and fintech clients on schedule.','Integrated GPS, camera and push notifications, raising engagement 20%.','Tuned Docker and Kubernetes pipelines, reducing deployment failures 35%.','Documentation cut knowledge transfer time 40%.','Contributed to 90%+ client retention.'],
+ a:[['20%','more engagement'],['35%','fewer deploy failures'],['40%','faster handover']]},
+{t:'Full Stack Developer',co:'Toko Kita',when:'2021',where:'Jakarta',
+ b:['Built user and product management modules, cutting manual admin work 40%.','Led a small agile team; sprint delivery consistency up 30%.','Redesigned the product database schema for 25% faster queries.','Introduced coding standards and reviews: post-release bugs down 35%.','Turned business needs into specs, reducing rework 20%.'],
+ a:[['40%','less admin work'],['30%','steadier sprints'],['35%','fewer post-release bugs']]},
+{t:'Fullstack Developer',co:'Widya Skilloka',when:'2020 – 2021',where:'Jakarta',
+ b:['Integrated an AI matching engine that improved candidate fit accuracy 35%.','Architected the AI-to-platform integration layer with under 1% production error rate.','Cut matching endpoint latency 30%.','Built the React frontend and Node.js backend for the AI module in 3 months.','Worked with data scientists on recruiter-facing UI, lifting adoption 25%.'],
+ a:[['35%','better matching'],['30%','lower API latency'],['25%','more recruiter adoption']]},
+{t:'Game Programmer Intern',co:'Game Changer',when:'2019',where:'Jakarta',
+ b:['Optimised a Unity game for 40% higher frame rate on low-end devices.','Refactored C# systems, reducing memory use 25% and most runtime crashes.','Fixed critical bugs under release pressure, cutting QA issues 30%.','Applied object pooling, asset compression and draw-call reduction.','Documented techniques that sped up later debugging 20%.'],
+ a:[['40%','higher frame rate'],['25%','less memory'],['30%','fewer QA issues']]}];
+const S=[
+['Languages','TypeScript, JavaScript, Java, Kotlin, Swift, PHP, C#'],
+['Frontend & mobile','React.js, Next.js, Vue.js, React Native, Android SDK, iOS SDK, State management, Responsive UI'],
+['Backend','NestJS, .NET Core / Web API, Spring Boot, Laravel, REST API, GraphQL, Microservices, Event-driven architecture'],
+['Cloud & DevOps','AWS, GCP, Docker, Kubernetes, Jenkins, GitHub Actions, CI/CD, Deployment automation'],
+['Data','MySQL, PostgreSQL, MongoDB, Redis, RabbitMQ, Query optimisation, Data modelling'],
+['Architecture','Scalable system design, Mobile architecture, Payment SDK integration, High availability, Performance optimisation'],
+['AI & data science','TensorFlow, AI integration, Prompt engineering, Data analysis'],
+['Testing','Unit, Integration and Performance testing, Bug triage, QA collaboration'],
+['Leadership','Team management, Code review, Technical roadmap, Sprint planning, Mentoring, Agile/Scrum, Stakeholder management']];
+
+const $=s=>document.querySelector(s);
+const src=k=>'img/'+k+'.webp';
+
+/* hero phone */
+const shots=[['hukumku-1','Hukumku','React Native · iOS & Android'],['vinita-1','Vinita','React Native · iOS'],['hukumku-3','Hukumku','Live chat over sockets'],['vinita-3','Vinita','Swipe, match, chat']];
+$('#scr').innerHTML=shots.map((s,i)=>`<img src="${src(s[0])}" alt="" class="${i?'':'on'}">`).join('');
+let si=0;const imgs=[...document.querySelectorAll('#scr img')];
+const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!rm)setInterval(()=>{imgs[si].classList.remove('on');si=(si+1)%imgs.length;imgs[si].classList.add('on');$('#ptag').innerHTML=shots[si][1]+'<i>'+shots[si][2]+'</i>'},3200);
+
+/* rotating role */
+const roles=['IT Department Manager','Senior Fullstack Engineer','Mobile Lead · React Native','EDC & payments specialist'];
+let ri=0;if(!rm)setInterval(()=>{ri=(ri+1)%roles.length;$('#role').textContent=roles[ri]},2800);
+
+/* projects */
+$('#chips').innerHTML=CATS.map((c,i)=>`<button class="chip" aria-pressed="${!i}" data-c="${c}">${c}</button>`).join('');
+$('#grid').innerHTML=P.map((p,i)=>`<button class="card rv" data-i="${i}" data-cat="${p.cat.join(' ')}"><div class="th"><img src="${src(p.img[0])}" alt="${p.t} screens" loading="lazy"></div><div class="bd"><h3>${p.t}</h3><div class="cl">${p.c}</div><div class="pills">${p.tags.map(t=>`<span class="pill">${t}</span>`).join('')}</div></div></button>`).join('');
+$('#chips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;
+  document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  const c=b.dataset.c;document.querySelectorAll('.card').forEach(k=>k.classList.toggle('hide',c!=='All'&&!k.dataset.cat.split(' ').includes(c)))});
+const dlg=$('#dlg'),tr=$('#track');
+const step=d=>tr.scrollBy({left:d*tr.clientWidth,behavior:rm?'auto':'smooth'});
+$('#grid').addEventListener('click',e=>{const b=e.target.closest('.card');if(!b)return;const p=P[b.dataset.i];
+  tr.innerHTML=p.img.map((k,j)=>`<figure><img src="${src(k)}" alt="${p.t} screen ${j+1}"></figure>`).join('');
+  $('#mt').textContent=p.t;$('#mc').textContent=p.c;$('#md').textContent=p.d;
+  $('#mp').innerHTML=p.tags.map(t=>`<span class="pill">${t}</span>`).join('');
+  $('.nav2').style.display=p.img.length>1?'flex':'none';
+  try{dlg.showModal()}catch(_){dlg.setAttribute('open','')}tr.scrollLeft=0});
+$('#close').onclick=()=>dlg.close();
+dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
+$('#prev').onclick=()=>step(-1);$('#next').onclick=()=>step(1);
+dlg.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')step(-1);if(e.key==='ArrowRight')step(1)});
+
+/* timeline */
+$('#roles').innerHTML=R.map((r,i)=>`<button role="tab" id="t${i}" aria-controls="panel" aria-selected="${!i}" data-i="${i}"><b>${r.t}</b><span>${r.co} · ${r.when}</span></button>`).join('');
+const show=i=>{const r=R[i];
+  document.querySelectorAll('#roles button').forEach((b,j)=>{b.setAttribute('aria-selected',j===i);b.tabIndex=j===i?0:-1});
+  $('#panel').setAttribute('aria-labelledby','t'+i);
+  $('#panel').innerHTML=`${r.promo?`<span class="promo">${r.promo}</span>`:''}<h3>${r.t}</h3><div class="meta">${r.co} · ${r.when} · ${r.where}</div><ul>${r.b.map(x=>`<li>${x}</li>`).join('')}</ul><div class="ach">${r.a.map(a=>`<div><strong>${a[0]}</strong>${a[1]}</div>`).join('')}</div>`};
+show(0);
+$('#roles').addEventListener('click',e=>{const b=e.target.closest('button');if(b)show(+b.dataset.i)});
+$('#roles').addEventListener('keydown',e=>{const cur=[...document.querySelectorAll('#roles button')].findIndex(b=>b.getAttribute('aria-selected')==='true');
+  let n=cur;if(['ArrowDown','ArrowRight'].includes(e.key))n=(cur+1)%R.length;else if(['ArrowUp','ArrowLeft'].includes(e.key))n=(cur-1+R.length)%R.length;else return;
+  e.preventDefault();show(n);document.getElementById('t'+n).focus()});
+
+/* skills */
+$('#sk').innerHTML=S.map(s=>`<div class="skc rv"><h3>${s[0]}</h3><div class="pills">${s[1].split(', ').map(t=>`<span class="pill">${t}</span>`).join('')}</div></div>`).join('');
+
+/* copy */
+document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{const o=b.textContent;
+  try{await navigator.clipboard.writeText(b.dataset.copy);b.textContent='Copied ✓'}catch(_){b.textContent='Select the text above'}
+  setTimeout(()=>b.textContent=o,1800)}));
+
+/* reveal + counters */
+const count=el=>{const n=+el.dataset.n,s=el.dataset.s||'';if(rm){el.textContent=n+s;return}const t0=performance.now();
+  const f=t=>{const k=Math.min(1,(t-t0)/1100);el.textContent=Math.round(n*(1-(1-k)**3))+s;if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)};
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');
+  e.target.querySelectorAll('[data-n]').forEach(count);io.unobserve(e.target)}),{threshold:.15});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* active nav */
+const secs=['work','experience','skills','contact'].map(id=>document.getElementById(id));
+const nio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)document.querySelectorAll('.links a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
+secs.forEach(s=>nio.observe(s));
+}
+</script>
+</body>
+</html>
